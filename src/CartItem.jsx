@@ -57,9 +57,13 @@ const CartItem = ({ onContinueShopping }) => {
     return item.quantity * cost;
   };
 
+  const calculateTotalQuantity = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+    };
+
   return (
     <div className="cart-container">
-      <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+      
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
@@ -78,7 +82,17 @@ const CartItem = ({ onContinueShopping }) => {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'></div>
+      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'>
+        <h2 style={{ color: 'black' }}>
+            Total Cart Amount: ${calculateTotalAmount()}
+        </h2>
+      </div>
+      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'>
+        <h2 style={{ color: 'black' }}>
+            Total Plants: {calculateTotalQuantity()}
+        </h2>
+      </div>
+      
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
